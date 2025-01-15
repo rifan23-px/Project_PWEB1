@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fasilitas Kamar Hotel</title>
+
+    <!-- Link Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding-top: 70px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 5px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 13%;
+        }
+        .table td, .table th {
+            vertical-align: middle;
+            padding: 5px 5px; 
+            text-align: center;
+        }
+        .room-image {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            border-radius: 10px;
+        }
+
+        .table-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .table td {
+            width: 200px; 
+            height: 200px; 
+        }
+        .table td, .table th {
+            white-space: normal; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Fasilitas Kamar Hotel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/project/Admin/welcome.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/project/Admin/kelolajenis.html">Kelola Jenis Kamar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/project/Admin/kelolafasilitas.html">Kelola Fasilitas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/project/Admin/lihatpesanan.html">Lihat Pemesan Konsumen</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Konten -->
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Fasilitas Kamar Hotel</h2>
+
+        <!-- Tabel Fasilitas -->
+        <div class="table-container">
+            <table class="table table-hover table-striped table-bordered" id="fasilitasTable">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Kamar</th>
+                        <th>Fasilitas</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-top border-dark">
+                        <td>
+                            <strong>Family</strong><br>
+                            <img src="/project/Admin/Foto/www2.jpg" alt="Family Room" class="room-image">
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Kolam renang outdoor</li>
+                                <li>Restoran bintang Michelin</li>
+                                <li>Gym dan spa mewah</li>
+                                <li>Wi-Fi</li>
+                                <li>Kamar dengan pemandangan laut</li>
+                                <li>Jasa antar jemput ke bandara</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editFasilitas(this)">Edit</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteFasilitas(this)">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr class="border-top border-dark">
+                        <td>
+                            <strong>Deluxe</strong><br>
+                            <img src="/project/Admin/Foto/room3.jpg" alt="Deluxe Room" class="room-image">
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Kolam renang umum</li>
+                                <li>Restoran dengan menu internasional</li>
+                                <li>Gym dengan peralatan modern</li>
+                                <li>Wi-Fi</li>
+                                <li>Kamar dengan balkon</li>
+                                <li>Layanan kamar 24 jam</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editFasilitas(this)">Edit</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteFasilitas(this)">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr class="border-top border-dark">
+                        <td>
+                            <strong>Standard</strong><br>
+                            <img src="/project/Admin/Foto/www.jpg" alt="Standard Room" class="room-image">
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Restoran dengan menu lokal</li>
+                                <li>Wi-Fi</li>
+                                <li>Layanan kebersihan harian</li>
+                                <li>Parkir gratis</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editFasilitas(this)">Edit</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteFasilitas(this)">Hapus</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Form untuk menambah fasilitas -->
+        <h3 class="mt-5">Tambah Fasilitas Baru</h3>
+        <form id="addFacilityForm">
+            <div class="mb-3">
+                <label for="roomType" class="form-label">Jenis Kamar</label>
+                <input type="text" class="form-control" id="roomType" required>
+            </div>
+            <div class="mb-3">
+                <label for="facilityList" class="form-label">Fasilitas</label>
+                <textarea class="form-control" id="facilityList" rows="4" required></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" id="saveButton" onclick="saveEdit()">Simpan Perubahan</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Fasilitas Kamar Hotel.</p>
+    </footer>
+
+    <!-- Link Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let editingRow = null; // Keep track of the row being edited
+
+        // Function to add a new facility
+        function addFacility() {
+            const roomType = document.getElementById('roomType').value;
+            const facilityList = document.getElementById('facilityList').value;
+
+            const table = document.getElementById('fasilitasTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td>
+                    <strong>${roomType}</strong><br>
+                    <img src="/project/Admin/Foto/room.jpg" alt="${roomType}" class="room-image">
+                </td>
+                <td>
+                    <ul>
+                        ${facilityList.split('\n').map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editFasilitas(this)">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteFasilitas(this)">Hapus</button>
+                </td>
+            `;
+            document.getElementById('roomType').value = '';
+            document.getElementById('facilityList').value = '';
+        }
+
+        // Function to edit a facility
+        function editFasilitas(button) {
+            const row = button.closest('tr');
+            const roomType = row.cells[0].innerText.split('\n')[0];
+            const facilities = row.cells[1].innerText.split('\n').slice(1).join('\n');
+
+            document.getElementById('roomType').value = roomType;
+            document.getElementById('facilityList').value = facilities;
+
+            editingRow = row; // Set the row being edited
+            document.getElementById('saveButton').style.display = 'inline'; // Show the "Save" button
+            document.getElementById('addButton').style.display = 'none'; // Hide "Add" button
+        }
+
+        // Function to save edited facility
+        function saveEdit() {
+            if (editingRow) {
+                const roomType = document.getElementById('roomType').value;
+                const facilityList = document.getElementById('facilityList').value;
+
+                editingRow.cells[0].innerHTML = `<strong>${roomType}</strong><br><img src="/project/Admin/Foto/room.jpg" alt="${roomType}" class="room-image">`;
+                editingRow.cells[1].innerHTML = `<ul>${facilityList.split('\n').map(item => `<li>${item}</li>`).join('')}</ul>`;
+
+                // Reset form and hide the save button
+                document.getElementById('roomType').value = '';
+                document.getElementById('facilityList').value = '';
+                document.getElementById('saveButton').style.display = 'none';
+                document.getElementById('addButton').style.display = 'inline'; // Show "Add" button again
+
+                editingRow = null; // Reset editing row
+            }
+        }
+
+        // Function to delete a facility
+        function deleteFasilitas(button) {
+            if (confirm('Apakah Anda yakin ingin menghapus fasilitas ini?')) {
+                const row = button.closest('tr');
+                row.remove();
+            }
+        }
+    </script>
+</body>
+</html>
